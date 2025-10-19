@@ -9,7 +9,6 @@ import numpy as np
 from PIL import Image
 from tqdm import tqdm
 
-
 parser = argparse.ArgumentParser(description='CoLIE')
 parser.add_argument('--input_folder', type=str, default='input/dataset/LOLdataset/eval15/low')
 parser.add_argument('--output_folder', type=str, default='output/dataset/LOLdataset/eval15/high')
