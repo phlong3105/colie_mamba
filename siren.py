@@ -1,9 +1,7 @@
 import torch
 import torch.nn as nn
 import numpy as np
-from mamba_ssm import Mamba
 
-print('mamba')
 
 class SirenLayer(nn.Module):
     def __init__(self, in_f, out_f, w0=30, is_first=False, is_last=False):
