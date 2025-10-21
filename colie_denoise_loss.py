@@ -46,7 +46,7 @@ def set_seed(seed):
 parser = argparse.ArgumentParser(description='CoLIE with Three Branches and Denoising Loss')
 # --- Arguments ---
 parser.add_argument('--input_folder', type=str, default='input/dataset/LOLdataset/eval15/low')
-parser.add_argument('--output_folder', type=str, default='output/dataset/LOLdataset/eval15/mamba_high')
+parser.add_argument('--output_folder', type=str, default='output/dataset/LOLdataset/eval15/mamba_high_v2')
 parser.add_argument('--down_size', type=int, default=256, help='downsampling size')
 parser.add_argument('--epochs', type=int, default=100, help='Number of training epochs')
 parser.add_argument('--lr', type=float, default=2e-4, help='Initial learning rate')
@@ -104,6 +104,7 @@ for PATH in tqdm(np.sort(os.listdir(opt.input_folder))):
         l_texture = L_texture()
 
         for epoch in range(opt.epochs):
+            print("Epochs: {}".format(epoch))
             model.train()
             optimizer.zero_grad()
 
