@@ -14,7 +14,7 @@ parser.add_argument('--input_folder', type=str, default='input/dataset/LOLdatase
 parser.add_argument('--output_folder', type=str, default='output/dataset/LOLdataset/eval15/high')
 parser.add_argument('--down_size', type=int, default=256, help='downsampling size')
 parser.add_argument('--epochs', type=int, default=100)
-parser.add_argument('--window', type=int, default=1, help='context window size')
+parser.add_argument('--window', type=int, default=7, help='context window size')
 parser.add_argument('--L', type=float, default=0.5)
 # loss fuction weigth parameters
 parser.add_argument('--alpha', type=float, required=True)
