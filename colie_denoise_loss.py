@@ -52,10 +52,10 @@ parser.add_argument('--epochs', type=int, default=100, help='Number of training 
 parser.add_argument('--lr', type=float, default=2e-4, help='Initial learning rate')
 parser.add_argument('--L', type=float, default=0.5, help='Target exposure level')
 # --- Loss Weights ---
-parser.add_argument('--alpha', type=float, default=85, help='Weight for fidelity loss (L_spa)')
-parser.add_argument('--beta', type=float, default=25, help='Weight for illumination smoothness (L_tv)')
-parser.add_argument('--gamma', type=float, default=43, help='Weight for exposure control (L_exp)')
-parser.add_argument('--delta', type=float, default=18)
+parser.add_argument('--alpha', type=float, default=1, help='Weight for fidelity loss (L_spa)')
+parser.add_argument('--beta', type=float, default=20, help='Weight for illumination smoothness (L_tv)')
+parser.add_argument('--gamma', type=float, default=8, help='Weight for exposure control (L_exp)')
+parser.add_argument('--delta', type=float, default=5)
 # --- Denoising Loss Weight ---
 parser.add_argument('--epsilon', type=float, default=18, help='Weight for reflectance smoothness (denoising)')
 # --- Mamba Arguments ---

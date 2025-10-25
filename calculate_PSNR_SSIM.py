@@ -14,10 +14,8 @@ def main():
 
     # GT - Ground-truth;
     # Gen: Generated / Restored / Recovered images
-    #folder_GT = 'D:\Program Files (x86)\PycharmProjects\InvDN\codes\data\CBSD68\original_png'
-    #folder_Gen = 'D:\Program Files (x86)\PycharmProjects\InvDN\experiments\Test_InvDN\CBSD68_15_test'
     folder_GT = '/home/lijin/PycharmProjects/colie/input/dataset/LOLdataset/eval15/high'
-    folder_Gen = '/home/lijin/PycharmProjects/colie/output/dataset/LOLdataset/eval15/mamba_high_v2'
+    folder_Gen = '/home/lijin/PycharmProjects/colie/output/dataset/LOLdataset/eval15/high'
 
     crop_border = 4
     suffix = ''  # suffix for Gen images
