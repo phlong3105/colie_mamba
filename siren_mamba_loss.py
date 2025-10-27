@@ -69,19 +69,19 @@ class CoLIENet(nn.Module):
     def __init__(self, hidden_dim, mamba_d_model, mamba_d_state, mamba_d_conv, mamba_expand, down_size):
         super().__init__()
 
-        #patch_feat_dim = hidden_dim // 4
+        patch_feat_dim = hidden_dim // 4
         spatial_feat_dim = hidden_dim // 4
         mamba_feat_dim = hidden_dim // 2
 
         # Branch 1: CNN for local features with added BatchNorm
-        # self.patch_net = nn.Sequential(
-        #     nn.Conv2d(1, patch_feat_dim // 2, kernel_size=3, padding=1),
-        #     nn.BatchNorm2d(patch_feat_dim // 2),  # <-- Added Normalization
-        #     nn.GELU(),
-        #     nn.Conv2d(patch_feat_dim // 2, patch_feat_dim, kernel_size=3, padding=1),
-        #     nn.BatchNorm2d(patch_feat_dim),  # <-- Added Normalization
-        #     nn.GELU()
-        # )
+        self.patch_net = nn.Sequential(
+            nn.Conv2d(1, patch_feat_dim // 2, kernel_size=3, padding=1),
+            nn.BatchNorm2d(patch_feat_dim // 2),  # <-- Added Normalization
+            nn.GELU(),
+            nn.Conv2d(patch_feat_dim // 2, patch_feat_dim, kernel_size=3, padding=1),
+            nn.BatchNorm2d(patch_feat_dim),  # <-- Added Normalization
+            nn.GELU()
+        )
 
         # Branch 2: SirenLayer-based MLP for spatial coordinates
         self.spatial_net = nn.Sequential(
@@ -103,8 +103,8 @@ class CoLIENet(nn.Module):
 
         # Final Fusion Network with added BatchNorm
         self.fusion_net = nn.Sequential(
-            #nn.Conv2d(patch_feat_dim + spatial_feat_dim + mamba_feat_dim, hidden_dim, kernel_size=1),
-            nn.Conv2d(spatial_feat_dim + mamba_feat_dim, hidden_dim, kernel_size=1),
+            nn.Conv2d(patch_feat_dim + spatial_feat_dim + mamba_feat_dim, hidden_dim, kernel_size=1),
+            #nn.Conv2d(spatial_feat_dim + mamba_feat_dim, hidden_dim, kernel_size=1),
             nn.BatchNorm2d(hidden_dim),  # <-- Added Normalization
             nn.GELU(),
             nn.Conv2d(hidden_dim, hidden_dim, kernel_size=1),
@@ -123,7 +123,7 @@ class CoLIENet(nn.Module):
         H, W = image.shape[-2], image.shape[-1]
 
         # Branch 1: Local Features
-        #patch_feat_map = self.patch_net(image)
+        patch_feat_map = self.patch_net(image)
 
         # Branch 2: Spatial Features
         spatial_feat_flat = self.spatial_net(coords_flat)
@@ -139,8 +139,8 @@ class CoLIENet(nn.Module):
         global_feat_map = self.mamba_exit(d2)
 
         # Fusion
-        #combined_feat_map = torch.cat((patch_feat_map, spatial_feat_map, global_feat_map), dim=1)
-        combined_feat_map = torch.cat((spatial_feat_map, global_feat_map), dim=1)
+        combined_feat_map = torch.cat((patch_feat_map, spatial_feat_map, global_feat_map), dim=1)
+        #combined_feat_map = torch.cat((spatial_feat_map, global_feat_map), dim=1)
         fused_map = self.fusion_net(combined_feat_map)
 
         output = self.output_head(fused_map)

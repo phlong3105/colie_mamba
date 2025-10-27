@@ -15,7 +15,7 @@ def main():
     # GT - Ground-truth;
     # Gen: Generated / Restored / Recovered images
     folder_GT = '/home/lijin/PycharmProjects/colie/input/dataset/LOLdataset/eval15/high'
-    folder_Gen = '/home/lijin/PycharmProjects/colie/output/dataset/LOLdataset/eval15/high'
+    folder_Gen = ('/home/lijin/PycharmProjects/colie/output/dataset/LOLdataset/eval15/mamba_high_v1')
 
     crop_border = 4
     suffix = ''  # suffix for Gen images
